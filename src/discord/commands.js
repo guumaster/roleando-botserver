@@ -1,7 +1,7 @@
 const Discord = require('discord.js')
 
 const config = require('../../config')
-const { generateRandomText, generateByLabel, getLabel } = require('../generator')
+const { generateRandomText, generateByLabel, getGeneratorByLabel } = require('../generator')
 
 const prefix = config.discord.prefix
 const CMD = {
@@ -25,11 +25,10 @@ module.exports = async msg => {
     return
   }
 
-  const label = getLabel(cmd)
+  const data = getGeneratorByLabel(cmd)
 
-  if (!label) return
+  if (!data) return
 
-  console.log('label', label)
-  const reply = await generateByLabel(label)
+  const reply = await generateByLabel(data)
   msg.channel.send(reply)
 }

@@ -1,5 +1,5 @@
 const { isReplyRequest, replyToTweet } = require('./client')
-const { getLabel, generateByLabel } = require('../generator')
+const { getGeneratorByLabel, generateByLabel } = require('../generator')
 
 module.exports = async (tweet) => {
   console.log('Tweet received', tweet.text)
@@ -8,16 +8,16 @@ module.exports = async (tweet) => {
     return
   }
 
-  const label = getLabel(tweet.text)
+  const data = getGeneratorByLabel(tweet.text)
 
-  if (!label) {
+  if (!data) {
     console.log(`Unknown label on tweet: \n ${tweet.text}`)
     return
   }
 
-  console.log(`Tweeting about ${label}`)
+  console.log(`Tweeting about ${data.key}`)
 
-  const reply = await generateByLabel(label, `@${tweet.user.screen_name}`)
+  const reply = await generateByLabel(data, `@${tweet.user.screen_name}`)
 
   replyToTweet({ originalTweet: tweet, reply })
   console.log('Done')

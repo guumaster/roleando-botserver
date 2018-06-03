@@ -1,0 +1,6 @@
+{
+  "rules": [
+    { "pathname": "/**", "method": ["GET", "POST"], "dest": "roleando-botserver.now.sh" },
+    { "dest": "roleando-botserver.now.sh" }
+  ]
+}

@@ -6,9 +6,7 @@ const config = require('../../config')
 
 const API_URL = 'https://roleando.herokuapp.com'
 const MAX_RETRIES = config.maxRetries
-const LABELS = config.generatorLabels
 const GENERATORS = config.generators
-const GENERATORS_IDS = Object.values(config.generators)
 
 const isTwittable = str => str.length <= config.tweetLength
 
@@ -62,33 +60,29 @@ const generateUntilTwittable = (generator, extra) => {
   return cleanText
 }
 
-const getLabel = (text) => {
-  return Object.keys(LABELS).reduce((label, key) => {
-    if (label) return label
+const getGeneratorByLabel = (text) => {
+  return GENERATORS.reduce((id, gen) => {
+    if (id) return id
 
-    if ( LABELS[key].some(lb => text.toLowerCase().match(lb))) {
-      return key
+    if ( gen.labels.some(lb => text.toLowerCase().match(lb))) {
+      return gen
     }
   }, '')
 }
 
 const generateRandomText = async () => {
-  const id = pick(GENERATORS_IDS)
-  const generator = await loadGenerator(id)
+  const gen = pick(GENERATORS)
+  const generator = await loadGenerator(gen.id)
   return generateUntilTwittable(generator)
 }
 
-const generateByLabel = async (key, extra) => {
-  const id = GENERATORS[key]
-  if (!key) {
-    throw new Error(`Unknown generator ${id}`)
-  }
-  const generator = await loadGenerator(id)
+const generateByLabel = async (data, extra) => {
+  const generator = await loadGenerator(data.id)
   return generateUntilTwittable(generator, extra)
 }
 
 module.exports = {
-  getLabel,
+  getGeneratorByLabel,
   generateByLabel,
   generateRandomText
 }
