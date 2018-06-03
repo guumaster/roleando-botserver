@@ -28,6 +28,7 @@
   "dependencies": {
     "@guumaster/rpgen": "1.2.2",
     "axios": "0.18.0",
+    "body-parser": "1.18.3",
     "discord.js": "11.3.2",
     "dotenv": "6.0.0",
     "express": "4.16.3",

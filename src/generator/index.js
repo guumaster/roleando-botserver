@@ -37,16 +37,23 @@ const loadGenerator = id => {
       return  LOADED_GENERATORS[id]
     })
 }
+const generate = ({ generator, stripHeader }) => {
+  let cleanText = generator.generate()
 
-const generateUntilTwittable = (generator, extra) => {
+  if (stripHeader) cleanText = cleanText.replace(/^.+<hr>/,'')
+
+  cleanText = striptags(cleanText, ['strong', 'span'], '\n').replace(/\n+/g, '\n').replace(/ +/g, ' ')
+  cleanText = striptags(cleanText, [], '')
+  return cleanText
+}
+
+const generateUntilTwittable = ({ generator, extra, stripHeader }) => {
   let cleanText
   let times = 0
 
   do {
     times++
-    cleanText = generator.generate()
-    cleanText = striptags(cleanText, ['strong', 'span'], '\n').replace(/\n+/g, '\n').replace(/ +/g, ' ')
-    cleanText = striptags(cleanText, [], '')
+    cleanText = generate({ generator, stripHeader })
   } while (!isTwittable(`${cleanText}\n${extra}`) && times < MAX_RETRIES)
 
   if (times === MAX_RETRIES) {
@@ -73,16 +80,22 @@ const getGeneratorByLabel = (text) => {
 const generateRandomText = async () => {
   const gen = pick(GENERATORS)
   const generator = await loadGenerator(gen.id)
-  return generateUntilTwittable(generator)
+  return generateUntilTwittable({ generator })
 }
 
 const generateByLabel = async (data, extra) => {
   const generator = await loadGenerator(data.id)
-  return generateUntilTwittable(generator, extra)
+  return generateUntilTwittable({ generator, extra })
+}
+
+const generateForConversation = async (data) => {
+  const generator = await loadGenerator(data.id)
+  return generate({ generator, stripHeader: true }).replace(/^\n+/, '').replace(/\n+$/, '')
 }
 
 module.exports = {
   getGeneratorByLabel,
   generateByLabel,
-  generateRandomText
+  generateRandomText,
+  generateForConversation
 }

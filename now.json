@@ -1,6 +1,6 @@
 {
   "name": "roleando-botserver",
-  "alias": "https://roleando-botserver.now.sh",
+  "alias": "roleando-botserver.now.sh",
   "type": "docker",
   "public": true,
   "scale": {
