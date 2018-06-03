@@ -4,9 +4,9 @@ const stats = require('./stats')
 const tweet = require('./tweet')
 
 module.exports = app => {
-  app.use('/_stats/', stats)
-  app.use('/api/internal/', adminOnly)
-  app.post('/api/internal/tweet/', tweet)
+  app.get('/_stats', stats)
+  app.use('/_internal', adminOnly)
+  app.post('/_internal/tweet', tweet)
 
   // error handler
   app.use(errors)
