@@ -17,7 +17,7 @@ module.exports = {
     access_token: process.env.BOT_ACCESS_TOKEN,
     access_token_secret: process.env.BOT_ACCESS_TOKEN_SECRET,
     screen_name: 'roleandobot',
-    dryRun: true
+    dryRun: !!(process.env.DRY_RUN) || false
   },
   generators: [
     {

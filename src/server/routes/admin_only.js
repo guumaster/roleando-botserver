@@ -7,6 +7,7 @@ module.exports = (req, res, next) => {
       code: BAD_REQUEST,
       message: 'Missing or invalid admin token'
     })
+    return
   }
   return next()
 }
