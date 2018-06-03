@@ -1,0 +1,43 @@
+{
+  "name": "roleando-botserver",
+  "version": "1.0.0",
+  "description": "Un bot para inventar historias",
+  "main": "src/start.js",
+  "scripts": {
+    "start": "node src/start",
+    "local": "nodemon src/start",
+    "try": "DRY_RUN=1 node src/bot"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/guumaster/roleando-botserver.git"
+  },
+  "keywords": [
+    "bot",
+    "roleando",
+    "rpg",
+    "discord",
+    "generator"
+  ],
+  "author": "guumaster",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/guumaster/roleando-botserver/issues"
+  },
+  "homepage": "https://github.com/guumaster/roleando-botserver#readme",
+  "dependencies": {
+    "@guumaster/rpgen": "1.2.2",
+    "axios": "0.18.0",
+    "discord.js": "11.3.2",
+    "dotenv": "6.0.0",
+    "express": "4.16.3",
+    "figures": "2.0.0",
+    "http-status": "^1.1.2",
+    "node-stats-lite": "^2.0.3",
+    "striptags": "3.1.1",
+    "twit": "2.2.10"
+  },
+  "devDependencies": {
+    "nodemon": "1.17.5"
+  }
+}
