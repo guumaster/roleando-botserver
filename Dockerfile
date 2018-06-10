@@ -1,4 +1,4 @@
-FROM alekzonder/puppeteer:latest
+FROM node:10-alpine
 
 WORKDIR /app
 
