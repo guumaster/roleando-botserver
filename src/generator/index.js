@@ -4,7 +4,7 @@ const striptags = require('striptags')
 
 const config = require('../../config')
 
-const API_URL = 'https://roleando.herokuapp.com'
+const API_URL = config.apiBaseUrl
 const MAX_RETRIES = config.maxRetries
 const GENERATORS = config.generators
 

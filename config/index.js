@@ -5,6 +5,7 @@ module.exports = {
     port: process.env.PORT || 3000,
     adminToken: process.env.ADMIN_TOKEN || Math.random()
   },
+  apiBaseUrl: 'https://api.rolodromo.com',
   maxRetries: 100,
   tweetLength: 280,
   discord: {
