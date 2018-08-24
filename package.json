@@ -29,16 +29,16 @@
     "@guumaster/rpgen": "1.2.2",
     "axios": "0.18.0",
     "body-parser": "1.18.3",
-    "discord.js": "11.3.2",
+    "discord.js": "11.4.2",
     "dotenv": "6.0.0",
     "express": "4.16.3",
     "figures": "2.0.0",
-    "http-status": "^1.1.2",
+    "http-status": "1.2.0",
     "node-stats-lite": "^2.0.3",
     "striptags": "3.1.1",
-    "twit": "2.2.10"
+    "twit": "2.2.11"
   },
   "devDependencies": {
-    "nodemon": "1.17.5"
+    "nodemon": "1.18.3"
   }
 }
