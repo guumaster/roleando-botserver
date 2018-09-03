@@ -20,6 +20,8 @@ module.exports = {
     screen_name: 'roleandobot',
     dryRun: !!(process.env.DRY_RUN) || false
   },
+
+    // TODO: DEPRECATE THIS LIST
   generators: [
     {
       id: 'BytfSUVS',

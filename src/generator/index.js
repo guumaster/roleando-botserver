@@ -15,8 +15,8 @@ const pick = arr => arr[Math.floor(Math.random() * arr.length)]
 const LOADED_GENERATORS = {}
 
 const loadGenerator = id => {
-  if ( LOADED_GENERATORS[id]) {
-    return  LOADED_GENERATORS[id]
+  if (LOADED_GENERATORS[id]) {
+    return LOADED_GENERATORS[id]
   }
   console.log(`Loading generator: ${id}`)
 
@@ -34,13 +34,13 @@ const loadGenerator = id => {
         }, '')
       }
       LOADED_GENERATORS[id] = rpgen.generator.create(`${tpls}\n\n${tables}\n\n${children}`)
-      return  LOADED_GENERATORS[id]
+      return LOADED_GENERATORS[id]
     })
 }
 const generate = ({ generator, stripHeader }) => {
   let cleanText = generator.generate()
 
-  if (stripHeader) cleanText = cleanText.replace(/^.+<hr>/,'')
+  if (stripHeader) cleanText = cleanText.replace(/^.+<hr>/, '')
 
   cleanText = striptags(cleanText, ['strong', 'span'], '\n').replace(/\n+/g, '\n').replace(/ +/g, ' ')
   cleanText = striptags(cleanText, [], '')
@@ -71,14 +71,23 @@ const getGeneratorByLabel = (text) => {
   return GENERATORS.reduce((id, gen) => {
     if (id) return id
 
-    if ( gen.labels.some(lb => text.toLowerCase().match(lb))) {
+    if (gen.labels.some(lb => text.toLowerCase().match(lb))) {
       return gen
     }
   }, '')
 }
 
+const pickGenerator = async () => {
+  return axios
+    .get(`${API_URL}/api/generators/tables/twitter`)
+    .then(res => res.data)
+    .then(list => {
+      return pick(list)
+    })
+}
+
 const generateRandomText = async () => {
-  const gen = pick(GENERATORS)
+  const gen = await pickGenerator()
   const generator = await loadGenerator(gen.id)
   return generateUntilTwittable({ generator })
 }
